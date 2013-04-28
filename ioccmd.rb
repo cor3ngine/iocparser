@@ -4,6 +4,13 @@ require 'optparse'
 require 'rexml/document'
 include REXML
 
+def type(xmlfile,attribute)
+  attr_types = []
+  XPath.each(xmlfile, "//Context[@document='#{attribute}']") do |item|
+    attr_types << item.attribute("search").value
+  end
+  puts attr_types.uniq.sort
+end
 
 def attributes(xmlfile)
   nodes_list = nodes(xmlfile)
@@ -57,7 +64,9 @@ optparse = OptionParser.new do |opts|
   opts.on('-e', '--extract [OBJECT,...]',Array, 'Extract OBJECT in plain text') do |f|
     options[:extract] = f
   end
-
+  opts.on('-t', '--type [ATTRIBUTE,...]', Array, 'Extract TYPE for each ATTRIBUTE') do |f|
+    options[:type] = f
+  end
 end
 
 optparse.parse!
@@ -89,3 +98,8 @@ options[:extract].each do |argument|
   end
 end
 
+if !options[:type].nil?
+  options[:type].each do |argument|
+    type(xmlioc,argument)
+  end
+end

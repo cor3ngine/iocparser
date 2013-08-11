@@ -1,6 +1,6 @@
 # Iocparser
 
-iocparser is a command line utility to parse and query Mandiant XML Indicator of Compromise (IOC) files. 
+iocparser is a command line utility to parse and query Mandiant Indicator of Compromise (IOC) XML files. 
 
 ## Installation
 
@@ -31,7 +31,7 @@ Print the type of an IOC item
     $ iocparser -f test.ioc -t Network
       Network/DNS
 
-Print the values embedded into the IOC type
+Print the values embedded into an IOC type
 
     $ iocparser -f test.ioc -v Network/DNS
       maliciousdomain1.com

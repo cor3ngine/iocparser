@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Iocparser::VERSION
   spec.authors       = ["Matteo Michelini"]
   spec.email         = ["matteo.michelini@gmail.com"]
-  spec.description   = %q{Command line utility to parse Mandiant IOC files}
-  spec.summary       = %q{Command line utility to parse Mandiant IOC files}
-  spec.homepage      = ""
+  spec.description   = %q{Command line utility to query Mandiant IOC files}
+  spec.summary       = %q{Command line utility to query Mandiant IOC files}
+  spec.homepage      = "https://github.com/cor3ngine/iocparser"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

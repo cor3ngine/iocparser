@@ -39,11 +39,11 @@ end
 ioc = IOCParser.new("#{options[:file]}")
 attribute = ioc.node_list
 if !options[:file].nil? && options[:type].nil? && options[:value].nil?
-  puts "=== IOC Items ==="
+  puts "+++ IOC Items +++"
   attribute.uniq.each do |item|
     puts "#{item} => #{attribute.select {|a| a === "#{item}"}.count} "
   end
-  puts "=== END ==="
+  puts "+++ END +++"
   exit
 end
 

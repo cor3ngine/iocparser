@@ -1,39 +1,42 @@
-# ioccmd
+# Iocparser
 
-ioccmd is a command line utility to parse Indicator of Compromise (IOC) files
+iocparser is a command line utility to parse and query Mandiant XML Indicator of Compromise (IOC) files. 
+
+## Installation
+
+Download and unzip the master zip from github and execute the following into the iocparser directory
+
+    $ gem build ./iocparser.gemspec
+    # gem install iocparser-0.0.1.gem
+
+Or install it yourself as:
+
+    $ gem install iocparser
 
 ## Usage
 
-List of IOC attributes:
+Print the structure of the IOC file with the number of items embedded into it
 
-    $ ruby ioccmd.rb -f test.ioc -e ATTRS
-      [+] Opening test.ioc
-      [+] List of Attributes:
-      Network: 
-      3
-      PortItem: 
-      2 
-      UrlHistoryItem: 
-      3
-      FileItem: 
-      246
-      ProcessItem: 
-      2
-      [+] ==== 
+    $ iocparser -f test.ioc
+      +++ IOC Items +++
+      Network => 3 
+      PortItem => 2 
+      UrlHistoryItem => 3 
+      FileItem => 246 
+      ProcessItem => 2 
+      +++ END +++
 
-List of attribute types of UrlHistoryItem:
+Print the type of an IOC item
 
-    $ ruby ioccmd.rb -f test.ioc -t UrlHistoryItem
-      [+] Opening test.ioc
-      UrlHistoryItem/URL
+    $ iocparser -f test.ioc -t Network
+      Network/DNS
 
-List of values inside UrlHistoryItem/URL:
+Print the values embedded into the IOC type
 
-    $ ruby ioccmd.rb -f test.ioc -v UrlHistoryItem/URL
-      [+] Opening test.ioc
-      ctx-na.purpledaily.com
-      walk.bigish.net
-      ftel.marsbrother.com
+    $ iocparser -f test.ioc -v Network/DNS
+      maliciousdomain1.com
+      maliciousdomain2.net
+      maliciousdomain3.org
 
 ## Contributing
 

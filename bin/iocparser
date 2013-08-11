@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(File.dirname(__FILE__)), 'lib')
+
+require 'iocparser'
+require 'optparse'
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+
+  opts.banner = "Usage: iocparser -f IOC_FILE [...]\n" \
+                "Example: ioccmd -f myindicator.ioc -t Network\n" 
+  opts.on('-h', '--help', 'Display this menu') do
+    puts opts
+    exit
+  end
+  opts.on('-f', '--f FILE', 'IOC XML File') do |f|
+    options[:file] = f
+  end
+#  options[:extract] = []
+#  opts.on('-e', '--extract [OBJECT,...]',Array, 'Extract OBJECT in plain text') do |f|
+#    options[:extract] = f
+#  end
+  opts.on('-t', '--type ATTRIBUTE', 'Extract TYPE of ATTRIBUTE') do |f|
+    options[:type] = f
+  end
+  opts.on('-v', '--value TYPE', 'Extract VALUE for TYPE of ATTRIBUTE') do |f|
+    options[:value] = f
+  end
+end
+
+optparse.parse!
+
+if options[:file].nil?
+  puts "[-] Missing argument try `iocparser -h`"
+  exit
+end
+
+ioc = IOCParser.new("#{options[:file]}")
+attribute = ioc.node_list
+if !options[:file].nil? && options[:type].nil? && options[:value].nil?
+  puts "+++ IOC Items +++"
+  attribute.uniq.each do |item|
+    puts "#{item} => #{attribute.select {|a| a === "#{item}"}.count} "
+  end
+  puts "+++ END +++"
+  exit
+end
+
+if !options[:type].nil?
+  type = ioc.type(options[:type])
+  puts type
+  exit
+end
+
+if !options[:value].nil?
+  value = ioc.value(options[:value])
+  puts value
+  exit
+end

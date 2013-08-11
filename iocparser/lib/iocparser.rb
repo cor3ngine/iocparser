@@ -1,5 +1,6 @@
 require "iocparser/version"
+require "iocparser/iocparser"
 
-module Iocparser
+#module Iocparser
   # Your code goes here...
-end
+#end

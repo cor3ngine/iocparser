@@ -9,7 +9,7 @@ options = {}
 optparse = OptionParser.new do |opts|
 
   opts.banner = "Usage: iocparser -f IOC_FILE [...]\n" \
-                "Example: ioccmd -f myindicator.ioc -t Network\n" \
+                "Example: ioccmd -f myindicator.ioc -t Network\n" 
   opts.on('-h', '--help', 'Display this menu') do
     puts opts
     exit
@@ -38,16 +38,23 @@ end
 
 ioc = IOCParser.new("#{options[:file]}")
 attribute = ioc.node_list
-attribute.uniq.each do |item|
-  puts "#{item} => #{attribute.select {|a| a === "#{item}"}.count} "
+if !options[:file].nil? && options[:type].nil? && options[:value].nil?
+  puts "=== IOC Items ==="
+  attribute.uniq.each do |item|
+    puts "#{item} => #{attribute.select {|a| a === "#{item}"}.count} "
+  end
+  puts "=== END ==="
+  exit
 end
 
 if !options[:type].nil?
   type = ioc.type(options[:type])
   puts type
+  exit
 end
 
 if !options[:value].nil?
   value = ioc.value(options[:value])
   puts value
+  exit
 end

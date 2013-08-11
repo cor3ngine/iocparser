@@ -17,13 +17,13 @@ Or install it yourself as:
 
 Print the structure of the IOC file with the number of items embedded into it
     $ iocparser -f test.ioc
-      === IOC Items ===
+      +++ IOC Items +++
       Network => 3 
       PortItem => 2 
       UrlHistoryItem => 3 
       FileItem => 246 
       ProcessItem => 2 
-      === END ===
+      +++ END +++
 
 Print the type of an IOC item
 

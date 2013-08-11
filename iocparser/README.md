@@ -16,6 +16,7 @@ Or install it yourself as:
 ## Usage
 
 Print the structure of the IOC file with the number of items embedded into it
+
     $ iocparser -f test.ioc
       +++ IOC Items +++
       Network => 3 
